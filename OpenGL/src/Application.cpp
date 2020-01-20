@@ -13,7 +13,7 @@
 
 static void GLClearError()
 {
-   //while (glGetError() != GL_NO_ERROR);
+   while (glGetError() != GL_NO_ERROR);
 }
 
 static bool GLLogCall(const char* function, const char* file, int line)
