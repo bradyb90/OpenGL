@@ -119,6 +119,12 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
 
 unsigned int Shader::GetUniformLocation(const std::string& name)
 {
+   auto found = m_UniformLocationCache.find(name);
+   if (found != m_UniformLocationCache.end())
+   {
+      return found->second;
+   }
+
    GLCall(int location = glGetUniformLocation(m_RendererId, name.c_str()));
 
    if (location == -1)
@@ -126,5 +132,6 @@ unsigned int Shader::GetUniformLocation(const std::string& name)
       std::cout << "Warning: uniform '" << name << "' doesn't exist!" << std::endl;
    }
 
+   m_UniformLocationCache[name] = location;
    return location;
 }
